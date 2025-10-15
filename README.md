@@ -17,9 +17,10 @@
 
 1. 在 HACS 中点击"集成"
 2. 点击右下角的"添加自定义存储库"
-3. 输入仓库URL (https://github.com/lambilly/hass_today_history/)并选择类别为"集成"
-4. 在集成列表中找到"历史上的今天"并安装
-5. 重启 Home Assistant
+3. 输入仓库URL (https://github.com/lambilly/hass_today_history/)
+4. 并选择类别为"集成"
+5. 在集成列表中找到"历史上的今天"并安装
+6. 重启 Home Assistant
 
 ### 手动安装
 
