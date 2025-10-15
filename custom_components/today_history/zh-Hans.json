@@ -1,0 +1,45 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "历史上的今天",
+        "description": "探数数据 API 申请地址：{api_url}\n数据更新间隔范围：60-43200分钟，默认1440分钟\n历史滚动间隔范围：5-300秒，默认30秒",
+        "data": {
+          "api_key": "API密钥",
+          "update_interval": "数据更新间隔（分钟）",
+          "scroll_interval": "历史滚动间隔（秒）"
+        }
+      }
+    },
+    "error": {
+      "invalid_api_key": "无效的API密钥，请检查API密钥是否正确"
+    },
+    "abort": {
+      "already_configured": "该设备已被配置",
+      "single_instance_allowed": "只能配置一个实例"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "历史上的今天设置",
+        "description": "调整数据更新间隔和历史滚动间隔\n数据更新间隔范围：60-43200分钟\n历史滚动间隔范围：5-300秒",
+        "data": {
+          "update_interval": "数据更新间隔（分钟）",
+          "scroll_interval": "历史滚动间隔（秒）"
+        }
+      }
+    }
+  },
+  "title": "历史上的今天",
+  "entity": {
+    "sensor": {
+      "jin_ri_li_shi": {
+        "name": "今日历史"
+      },
+      "gun_dong_li_shi": {
+        "name": "滚动历史"
+      }
+    }
+  }
+}
