@@ -1,0 +1,14 @@
+{
+  "name": "历史上的今天",
+  "render_readme": true,
+  "homeassistant": "2023.8.0",
+  "hide_default_branch": true,
+  "zip_release": false,
+  "filename": "today_history.zip",
+  "domain": "today_history",
+  "documentation": "https://github.com/lambilly/hass_today_history",
+  "issue_tracker": "https://github.com/lambilly/hass_today_history/issues",
+  "codeowners": ["@lambilly"],
+  "version": "1.0.0",
+  "iot_class": "cloud_polling"
+}
