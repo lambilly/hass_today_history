@@ -79,31 +79,18 @@
 - **数据更新间隔**: 60-43200分钟（默认1440分钟，即24小时）
 - **头条滚动间隔**: 5-300秒（默认30秒）
 
-## 自动化示例
+## 卡片显示，需要在HACS安装：Lovelace HTML Jinja2 Template card 卡片
 
 ```yaml
-# 当有新历史数据时发送通知
-automation:
-  - alias: "今日历史更新通知"
-    trigger:
-      platform: state
-      entity_id: sensor.jin_ri_li_shi
-    action:
-      service: notify.mobile_app
-      data:
-        message: "今日历史已更新：{{ state_attr('sensor.jin_ri_li_shi', 'today_item').content }}"
-
-# 使用滚动历史内容
-automation:
-  - alias: "显示历史事件"
-    trigger:
-      platform: time_pattern
-      seconds: "/30"
-    action:
-      service: persistent_notification.create
-      data:
-        title: "历史上的今天"
-        message: "{{ state_attr('sensor.gun_dong_li_shi', 'content') }}"
+type: custom:html-template-card
+content: >-
+  {% set content = state_attr('sensor.xin_xi_cha_xun_gun_dong_li_shi',
+  'content') %} {% set month =
+  state_attr('sensor.xin_xi_cha_xun_gun_dong_li_shi', 'month') %} {% set day =
+  state_attr('sensor.xin_xi_cha_xun_gun_dong_li_shi', 'day') %}<div 
+  style="color: white;"><p align=left><h3 style="color: white; margin-bottom:
+  0px;">【📋历史上的今天】({{month}}月{{day}}日)</h3> </p> </div> <p align= left
+  style="color:  white; font-size: 1.0em; margin-top: 10px;">{{ content }}</p>
 ```
 ## 故障排除
 ### 常见问题
