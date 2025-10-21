@@ -8,8 +8,7 @@ FORBIDDEN_KEYWORDS = [
     "死亡", "出生", "身亡", "自杀", "长逝", "长辞", "葬"
 ]
 
-# 默认间隔
-DEFAULT_UPDATE_INTERVAL = 1440  # 默认更新间隔1440分钟（24小时）
+# 默认滚动间隔
 DEFAULT_SCROLL_INTERVAL = 30    # 默认滚动间隔30秒
 
 # 属性键
@@ -19,5 +18,5 @@ ATTR_TOTAL_COUNT = "total_count"
 ATTR_SCROLL_CONTENT = "scroll_content"
 ATTR_SCROLL_INDEX = "scroll_index"
 ATTR_CURRENT_DATE = "current_date"
-ATTR_UPDATE_INTERVAL = "update_interval"
+ATTR_UPDATE_TIME = "update_time"
 ATTR_SCROLL_INTERVAL = "scroll_interval"

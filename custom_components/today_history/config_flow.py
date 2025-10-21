@@ -7,7 +7,7 @@ from homeassistant.core import HomeAssistant, callback
 from homeassistant.data_entry_flow import FlowResult
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 
-from .const import DOMAIN, DEFAULT_UPDATE_INTERVAL, DEFAULT_SCROLL_INTERVAL
+from .const import DOMAIN, DEFAULT_SCROLL_INTERVAL
 
 
 class TodayHistoryConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
@@ -28,7 +28,6 @@ class TodayHistoryConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                         "api_key": user_input["api_key"]
                     },
                     options={
-                        "update_interval": user_input["update_interval"],
                         "scroll_interval": user_input["scroll_interval"]
                     }
                 )
@@ -37,10 +36,6 @@ class TodayHistoryConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
         data_schema = vol.Schema({
             vol.Required("api_key"): str,
-            vol.Optional(
-                "update_interval", 
-                default=DEFAULT_UPDATE_INTERVAL
-            ): vol.All(vol.Coerce(int), vol.Range(min=60, max=43200)),
             vol.Optional(
                 "scroll_interval",
                 default=DEFAULT_SCROLL_INTERVAL
@@ -69,7 +64,17 @@ class TodayHistoryConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             
             async with async_timeout.timeout(10):
                 async with session.get(url) as response:
-                    return response.status == 200
+                    # 检查响应状态和内容类型
+                    if response.status != 200:
+                        return False
+                    
+                    content_type = response.headers.get('Content-Type', '')
+                    if 'application/json' not in content_type:
+                        return False
+                    
+                    # 尝试解析JSON
+                    data = await response.json()
+                    return isinstance(data, dict) and 'data' in data
         except Exception:
             return False
 
@@ -95,10 +100,6 @@ class TodayHistoryOptionsFlow(config_entries.OptionsFlow):
         return self.async_show_form(
             step_id="init",
             data_schema=vol.Schema({
-                vol.Optional(
-                    "update_interval",
-                    default=self.config_entry.options.get("update_interval", DEFAULT_UPDATE_INTERVAL)
-                ): vol.All(vol.Coerce(int), vol.Range(min=60, max=43200)),
                 vol.Optional(
                     "scroll_interval",
                     default=self.config_entry.options.get("scroll_interval", DEFAULT_SCROLL_INTERVAL)

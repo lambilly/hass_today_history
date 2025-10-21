@@ -12,7 +12,7 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 from homeassistant.helpers import event
 
-from .const import DOMAIN, DEFAULT_UPDATE_INTERVAL, DEFAULT_SCROLL_INTERVAL
+from .const import DOMAIN
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -56,8 +56,8 @@ class TodayHistorySensor(CoordinatorEntity, SensorEntity):
 
     @property
     def native_value(self) -> str:
-        """返回传感器状态."""
-        return self.coordinator.data.get("update_time", "")
+        """返回传感器状态 - 修改为当前日期."""
+        return self.coordinator.data.get("current_date", datetime.now().strftime("%Y-%m-%d"))
 
     @property
     def extra_state_attributes(self) -> dict[str, Any]:
@@ -68,7 +68,7 @@ class TodayHistorySensor(CoordinatorEntity, SensorEntity):
             "today_item": data.get("today_item", {}),
             "history_list": data.get("history_list", []),
             "total_count": data.get("total_count", 0),
-            "update_interval": self.coordinator.entry.options.get("update_interval", DEFAULT_UPDATE_INTERVAL)
+            "update_time": data.get("update_time", "")  # 添加update_time属性
         }
 
 
@@ -98,13 +98,12 @@ class TodayHistoryScrollSensor(CoordinatorEntity, SensorEntity):
 
     @property
     def native_value(self) -> str:
-        """返回滚动内容 - 修改为返回当天日期."""
+        """返回滚动内容 - 返回当天日期."""
         return self.coordinator.data.get("current_date", datetime.now().strftime("%Y-%m-%d"))
 
     @property
     def extra_state_attributes(self) -> dict[str, Any]:
         """返回滚动内容的详细属性."""
-        # 删除了scroll_content属性，添加了scroll_interval属性
         return {
             "title": self._current_item.get("title", ""),
             "year": self._current_item.get("year", ""),
