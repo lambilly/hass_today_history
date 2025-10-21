@@ -3,11 +3,10 @@
     "step": {
       "user": {
         "title": "历史上的今天",
-        "description": "探数数据 API 申请地址：{api_url}\n数据更新间隔范围：60-43200分钟，默认1440分钟\n历史滚动间隔范围：5-300秒，默认30秒",
+        "description": "请输入您的探数API密钥。\n\n探数数据 API 申请地址：{api_url}\n\n头条滚动间隔范围：5 秒 - 300 秒，默认30秒",
         "data": {
           "api_key": "API密钥",
-          "update_interval": "数据更新间隔（分钟）",
-          "scroll_interval": "历史滚动间隔（秒）"
+          "scroll_interval": "头条滚动间隔（秒）"
         }
       }
     },
@@ -23,10 +22,9 @@
     "step": {
       "init": {
         "title": "历史上的今天设置",
-        "description": "调整数据更新间隔和历史滚动间隔\n数据更新间隔范围：60-43200分钟\n历史滚动间隔范围：5-300秒",
+        "description": "调整头条滚动间隔\n\n头条滚动间隔范围：5 秒 - 300 秒",
         "data": {
-          "update_interval": "数据更新间隔（分钟）",
-          "scroll_interval": "历史滚动间隔（秒）"
+          "scroll_interval": "头条滚动间隔（秒）"
         }
       }
     }
